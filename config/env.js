@@ -8,6 +8,7 @@ const paths = require('./paths');
 delete require.cache[require.resolve('./paths')];
 
 const NODE_ENV = process.env.NODE_ENV;
+process.env.__DEV__ = true
 if (!NODE_ENV) {
   throw new Error(
     'The NODE_ENV environment variable is required but was not specified.'
@@ -96,6 +97,10 @@ function getClientEnvironment(publicUrl) {
       env[key] = JSON.stringify(raw[key]);
       return env;
     }, {}),
+    __DEV__: true,
+    __EXPERIMENTAL__: true,
+    __PROFILE__: true,
+    __UMD__: true,
   };
 
   return { raw, stringified };
